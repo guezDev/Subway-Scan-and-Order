@@ -7,7 +7,6 @@
  *
  * @format
  */
-//import 'react-native-gesture-handler';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Image, Text, View, Button} from 'react-native';
@@ -23,8 +22,8 @@ import FenetreAccueil from './views/FenetreAccueil';
 import FenetreHistorique from './views/FenetreHistorique';
 import FenetrePaiement from './views/FenetrePaiement';
 import FenetreAutres from './views/FenetreAutres';
-//import { createDrawerNavigator } from '@react-navigation/drawer';
-/*import {Naviguer} from './types/Naviguer'
+
+import {Naviguer} from './types/Naviguer'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function HomeScreen({ navigation }: Naviguer) {
@@ -57,9 +56,9 @@ function App() {
       </Drawer.Navigator>
     </NavigationContainer>
   );
-}*/
+}
 
-
+/*
 const Tab = createBottomTabNavigator();
 
 const TabNav= () => {
@@ -140,5 +139,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
+*/
 export default App;
