@@ -47,18 +47,16 @@ function NotificationsScreen({ navigation }:Naviguer) {
 
 const Drawer = createDrawerNavigator();
 
-function App() {
+function DrawerMenu() {
   return (
-    <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+        <Drawer.Screen name="Notifications hr" component={NotificationsScreen} />
       </Drawer.Navigator>
-    </NavigationContainer>
   );
 }
 
-/*
+
 const Tab = createBottomTabNavigator();
 
 const TabNav= () => {
@@ -87,7 +85,7 @@ const TabNav= () => {
       <Tab.Screen name="Accueil" component={FenetreAccueil} />
       <Tab.Screen name="Historique" component={FenetreHistorique} />
       <Tab.Screen name="Paiement" component={FenetrePaiement} />
-      <Tab.Screen name="Autres" component={FenetreAutres} />
+      <Tab.Screen name="Autres" component={DrawerMenu} />
     </Tab.Navigator>
   );
 }
@@ -139,5 +137,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-*/
+
 export default App;
