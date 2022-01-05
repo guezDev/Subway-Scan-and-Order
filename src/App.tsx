@@ -7,11 +7,11 @@
  *
  * @format
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Image, Text, View, Button} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -56,12 +56,11 @@ function DrawerMenu() {
   );
 }
 
-
 const Tab = createBottomTabNavigator();
 
 const TabNav= () => {
   return (
-    <Tab.Navigator screenOptions={({ route }) => ({
+    <Tab.Navigator screenOptions={({ route, navigation }) => ({
       tabBarIcon: ({color, size }) => {
         let iconName: string='';
 
@@ -72,6 +71,7 @@ const TabNav= () => {
         } else if (route.name==='Paiement') {
           iconName = 'credit-card'
         } else if (route.name==='Autres') {
+          navigation.dispatch(DrawerActions.openDrawer());
           return <Entypo name='dots-three-horizontal' size={size} color={color} />
         }
 
@@ -85,7 +85,7 @@ const TabNav= () => {
       <Tab.Screen name="Accueil" component={FenetreAccueil} />
       <Tab.Screen name="Historique" component={FenetreHistorique} />
       <Tab.Screen name="Paiement" component={FenetrePaiement} />
-      <Tab.Screen name="Autres" component={DrawerMenu} />
+      <Tab.Screen name="Autres" component={DrawerMenu}/>
     </Tab.Navigator>
   );
 }
