@@ -13,7 +13,7 @@ class FenetreSandwiches extends Component<Naviguer> {
 					<Text style={styles.texte}>Nos sandwiches</Text>
 					<Image
 						style={{ width: 290, height: 50 }}
-						source={require('../assets/images/american-steakhouse.PNG')}
+						source={require('../assets/images/Logo-1.png')}
 						resizeMode='contain'
 					/>
 					<View style={styles.bas}>
