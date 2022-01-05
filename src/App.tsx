@@ -7,11 +7,11 @@
  *
  * @format
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Image, Text, View, Button} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -47,9 +47,15 @@ function NotificationsScreen({ navigation }:Naviguer) {
 
 const Drawer = createDrawerNavigator();
 
-function DrawerMenu() {
+const [dw, setDw]= useState(0)
+
+function DrawerMenu({ navigation }:Naviguer) {
+  React.useEffect(()=>{
+    navigation.dispatch(DrawerActions.openDrawer())
+  },[dw])
+  
   return (
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator screenOptions={{headerShown: false}}>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications hr" component={NotificationsScreen} />
       </Drawer.Navigator>
