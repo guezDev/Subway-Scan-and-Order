@@ -7,11 +7,11 @@
  *
  * @format
  */
-import React, { useState } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Image, Text, View, Button} from 'react-native';
+import {Image, Text, View, Button, Pressable} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DrawerActions, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -25,43 +25,23 @@ import FenetreAutres from './views/FenetreAutres';
 
 import {Naviguer} from './types/Naviguer'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
-function HomeScreen({ navigation }: Naviguer) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }:Naviguer) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+import FenetreGestionCompte from './views/FenetreGestionCompte';
+import FenetreMentionsLegales from './views/FenetreMentionsLegales';
+import MenuTuiles from './views/MenuTuiles'
+import { stylesCommuns } from './utils/stylesCommuns';
+import FenetreSandwiches from './views/FenetreSandwiches';
 
 const Drawer = createDrawerNavigator();
 
-const [dw, setDw]= useState(0)
-
-function DrawerMenu({ navigation }:Naviguer) {
-  React.useEffect(()=>{
-    navigation.dispatch(DrawerActions.openDrawer())
-  },[dw])
-  
+function DrawerMenu() {
   return (
-      <Drawer.Navigator screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications hr" component={NotificationsScreen} />
+      <Drawer.Navigator initialRouteName="Gérer compte" defaultStatus="open" screenOptions={{headerShown: false}}>
+        <Drawer.Screen name="Gérer compte" component={FenetreGestionCompte} />
+        <Drawer.Screen name="Mentions légales" component={FenetreMentionsLegales} />
+        <Drawer.Screen name="Se déconnecter" component={ChoixAuthentification} />
       </Drawer.Navigator>
   );
 }
-
 
 const Tab = createBottomTabNavigator();
 
@@ -139,7 +119,54 @@ const App = () => {
             headerBackVisible: false
           }}
         />
+        <Stack.Screen
+          name="MenuTuiles"
+          component={MenuTuiles}
+          options={{
+            headerTitle: () => (
+            <>
+              <Image
+                style={{ width: 290, height: 50 }}
+                source={require('./assets/images/Logo-2.png')}
+                resizeMode='contain'
+                />
+              <Text style={{
+                backgroundColor: '#18503E', 
+                color: '#fff', 
+                textAlign: 'center' , 
+                width: 45,
+                }}>15:00</Text>
+            </>
+            ),
+            headerBackVisible: false,
+            headerLeft: ()=> <FontAwesome name='home' size={25} color='#18503E'/>
+          }}
+        />
+      <Stack.Screen
+          name="FenetreSandwiches"
+          component={FenetreSandwiches}
+          options={{
+            headerTitle: () => (
+            <>
+              <Image
+                style={{ width: 290, height: 50 }}
+                source={require('./assets/images/Logo-2.png')}
+                resizeMode='contain'
+                />
+              <Text style={{
+                backgroundColor: '#18503E', 
+                color: '#fff', 
+                textAlign: 'center' , 
+                width: 45,
+                }}>15:00</Text>
+            </>
+            ),
+            headerBackVisible: false,
+            headerLeft: ()=> <FontAwesome name='home' size={25} color='#18503E'/>
+          }}
+        />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 };

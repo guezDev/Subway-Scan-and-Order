@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {stylesCommuns} from "../utils/stylesCommuns";
 import {Naviguer} from '../types/Naviguer'
 import QRcodeIcon from 'react-native-vector-icons/MaterialIcons'
+import MenuTuiles from './MenuTuiles'
 
 class FenetreAccueil extends Component<Naviguer> {
 
@@ -13,7 +14,7 @@ class FenetreAccueil extends Component<Naviguer> {
 				Pour consulter et commander nos produits, veuillez scanner un QR code.
 				</Text>
 				<QRcodeIcon name='qr-code-scanner' size={200} style={styles.icon}/>
-				<Pressable style={[stylesCommuns.bouton]} onPress={()=> this.props.navigation.navigate('FenetreConnexion')}><Text style={stylesCommuns.texte}>Scanner QR Code</Text></Pressable>
+				<Pressable style={[stylesCommuns.bouton]} onPress={()=> this.props.navigation.navigate('MenuTuiles')}><Text style={stylesCommuns.texte}>Scanner QR Code</Text></Pressable>
 			</View>
 		);
 	}
