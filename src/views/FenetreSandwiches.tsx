@@ -7,16 +7,25 @@ import QRcodeIcon from 'react-native-vector-icons/MaterialIcons'
 
 class FenetreSandwiches extends Component<Naviguer> {
 	state = {
-		modalVisible: false
+		modalVisible: false,
+		open: false,
+		checked: 'first'
 	  };
-	  [checked, setChecked] = React.useState('first');
 	
 	  setModalVisible = (visible: boolean) => {
 		this.setState({ modalVisible: visible });
 	  }
+
+	  setOpen = (visible: boolean) => {
+		this.setState({ open: visible });
+	  }
+
+	  setChecked =(val: string) => {
+		  this.setState({checked: val})
+	  }
 	
 	render() {
-		const { modalVisible } = this.state;
+		const { modalVisible, open } = this.state;
 		return (
 			
 			<View style={styles.container}>
@@ -33,22 +42,33 @@ class FenetreSandwiches extends Component<Naviguer> {
 					>
 						<View style={styles.centeredView}>
 						<View style={styles.modalView}>
-							<Text style={styles.modalText}>Hello World!</Text>
+							<Text style={[styles.modalText, {fontWeight: 'bold'}]}>Choisir taille</Text>
 							<View>
-								<RadioButton
-									value="first"
-									status={ checked === 'first' ? 'checked' : 'unchecked' }
-									onPress={() => setChecked('first')}
-								/>
-								<RadioButton
-									value="second"
-									status={ checked === 'second' ? 'checked' : 'unchecked' }
-									onPress={() => setChecked('second')}
-								/>
+								<View style={{flexDirection: 'row', alignItems: 'center'}}>
+
+									<RadioButton
+										value="first"
+										status={ this.state.checked === 'first' ? 'checked' : 'unchecked' }
+										onPress={() => this.setChecked('first')}
+									/>
+									<Text>15 cm</Text>
+									
+								</View>
+								<View style={{flexDirection: 'row', alignItems: 'center'}}>
+									<RadioButton
+										value="second"
+										status={ this.state.checked === 'second' ? 'checked' : 'unchecked' }
+										onPress={() => this.setChecked('second')}
+									/>
+									<Text>30 cm</Text>
+								</View>
 							</View>
 							<Pressable
 							style={[styles.button, styles.buttonClose, {backgroundColor:'#18503E'}]}
-							onPress={() => this.setModalVisible(!modalVisible)}
+							onPress={() => {
+								this.setModalVisible(!modalVisible)
+								this.setOpen(!open)
+							}}
 							>
 							<Text style={styles.textStyle}>Ajouter</Text>
 							</Pressable>
@@ -157,7 +177,7 @@ class FenetreSandwiches extends Component<Naviguer> {
 					</View>
 				</View>
 
-				<View style={[styles.carte]}>
+				<View style={[styles.carte, {position: 'relative', left: this.state.open ? 6:0}]}>
 					<Text style={styles.nom}>Poulet</Text>
 					<Image
 						style={styles.img}
@@ -181,7 +201,7 @@ class FenetreSandwiches extends Component<Naviguer> {
 					</View>
 				</View>
 
-				<View style={[styles.carte]}>
+				<View style={[styles.carte,{position: 'relative', left: this.state.open ? 16:0}]}>
 					<Text style={styles.nom}>Galette de Légumes Végan</Text>
 					<Image
 						style={styles.img}
@@ -203,6 +223,32 @@ class FenetreSandwiches extends Component<Naviguer> {
 							<Pressable style={[stylesCommuns.bouton, styles.bt]} onPress={()=> this.props.navigation.navigate('FenetreConnexion')}><Text style={stylesCommuns.texte}>Ajouter</Text></Pressable>
 						</View>
 					</View>
+				</View>
+				<View style={[styles.bott, {display: this.state.open ? 'flex': 'none', 
+				}]}>
+					<Modal
+						animationType="slide"
+						transparent={true}
+						visible={open}
+						onRequestClose={() => {
+						Alert.alert("Modal has been closed.");
+						this.setOpen(!open);
+						}}
+					>
+						<View style={{position: 'relative', top: 485}}>
+						<View style={[styles.modalView, {backgroundColor:'#D0F1DD'}]}>
+							<Text style={[styles.modalText, {fontWeight: 'bold'}]}>Articles</Text>
+							<View style={{flexDirection: 'row'}}>
+								<Text style={{marginRight:8}}>
+									American steakhouse • 30 cm{'\n'}
+									7.85 €
+								</Text >
+								<Pressable style={[stylesCommuns.bouton, styles.bt, {marginLeft:8}]} onPress={()=> this.props.navigation.navigate('ValidationCommande')}><Text style={stylesCommuns.texte}>Payer</Text></Pressable>
+							</View>
+						</View>
+						</View>
+					</Modal>
+					
 				</View>
 			</View>
 		);
@@ -269,8 +315,10 @@ const styles=StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 22,
 
+	  },
+	  bott: {
+		flex: 1,
 	  },
 	  modalView: {
 		margin: 20,

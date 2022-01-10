@@ -30,12 +30,14 @@ import FenetreMentionsLegales from './views/FenetreMentionsLegales';
 import MenuTuiles from './views/MenuTuiles'
 import { stylesCommuns } from './utils/stylesCommuns';
 import FenetreSandwiches from './views/FenetreSandwiches';
+import ValidationCommande from './views/ValidationCommande';
 
 const Drawer = createDrawerNavigator();
 
 function DrawerMenu() {
   return (
-      <Drawer.Navigator initialRouteName="Gérer compte" defaultStatus="open" screenOptions={{headerShown: false}}>
+      <Drawer.Navigator initialRouteName="Gérer compte" defaultStatus="open" screenOptions={{headerShown: false, drawerActiveTintColor: "#18503E",
+      drawerInactiveTintColor: "#18503E",}}>
         <Drawer.Screen name="Gérer compte" component={FenetreGestionCompte} />
         <Drawer.Screen name="Mentions légales" component={FenetreMentionsLegales} />
         <Drawer.Screen name="Se déconnecter" component={ChoixAuthentification} />
@@ -104,21 +106,16 @@ const App = () => {
             headerTitle: () => (
             <>
               <Image
-                style={{ width: 290, height: 50 }}
+                style={{ width: 370, height: 50 }}
                 source={require('./assets/images/Logo-2.png')}
                 resizeMode='contain'
                 />
-              <Text style={{
-                backgroundColor: '#18503E', 
-                color: '#fff', 
-                textAlign: 'center' , 
-                width: 45,
-                }}>15:00</Text>
             </>
             ),
             headerBackVisible: false
           }}
         />
+        
         <Stack.Screen
           name="MenuTuiles"
           component={MenuTuiles}
@@ -126,16 +123,10 @@ const App = () => {
             headerTitle: () => (
             <>
               <Image
-                style={{ width: 290, height: 50 }}
+                style={{ width: 370, height: 50 }}
                 source={require('./assets/images/Logo-2.png')}
                 resizeMode='contain'
                 />
-              <Text style={{
-                backgroundColor: '#18503E', 
-                color: '#fff', 
-                textAlign: 'center' , 
-                width: 45,
-                }}>15:00</Text>
             </>
             ),
             headerBackVisible: false,
@@ -149,16 +140,28 @@ const App = () => {
             headerTitle: () => (
             <>
               <Image
-                style={{ width: 290, height: 50 }}
+                style={{ width: 370, height: 50 }}
                 source={require('./assets/images/Logo-2.png')}
                 resizeMode='contain'
                 />
-              <Text style={{
-                backgroundColor: '#18503E', 
-                color: '#fff', 
-                textAlign: 'center' , 
-                width: 45,
-                }}>15:00</Text>
+            </>
+            ),
+            headerBackVisible: false,
+            headerLeft: ()=> <FontAwesome name='home' size={25} color='#18503E'/>
+          }}
+        />
+        
+      <Stack.Screen
+          name="ValidationCommande"
+          component={ValidationCommande}
+          options={{
+            headerTitle: () => (
+            <>
+              <Image
+                style={{ width: 370, height: 50 }}
+                source={require('./assets/images/Logo-2.png')}
+                resizeMode='contain'
+                />
             </>
             ),
             headerBackVisible: false,
