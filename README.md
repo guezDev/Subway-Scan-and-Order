@@ -1,2 +1,6 @@
 # Subway-Scan-and-Order
-Application mobile Subway de commande sur place
+Projet de création d'une application mobile Subway de commande sur place
+
+Outils utilisés : React Native, TypeScript, Node.js, Express.js, MongoDB, Figma
+
+MIT License
